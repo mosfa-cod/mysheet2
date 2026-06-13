@@ -1,159 +1,150 @@
- * {
+ /* تنسيقات عامة للموقع */
+* {
     box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 body {
-    background: linear-gradient(135deg, #ffd3b6 0%, #ffaaa5 100%);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #eef2f5;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     min-height: 100vh;
+}
+
+.main-wrapper {
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 20px;
 }
 
-.container {
+/* 🎨 حاوية الترحيب وإدخال البيانات */
+.quiz-welcome-container {
+    background-color: #ffffff;
     width: 100%;
-    max-width: 650px;
+    max-width: 550px;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    display: flex;
+    flex-direction: column;
 }
 
-.card {
-    background: #ffffff;
-    border-radius: 20px;
-    padding: 40px 30px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    text-align: center;
+.welcome-text h1 {
+    color: #2c3e50;
+    font-size: 22px;
+    margin-top: 0;
+    margin-bottom: 12px;
 }
 
-.main-title {
-    color: #d9381e;
-    font-size: 26px;
-    margin-bottom: 5px;
+.welcome-text p {
+    color: #7f8c8d;
+    font-size: 15px;
+    line-height: 1.6;
+    margin-bottom: 25px;
 }
 
-.subtitle {
-    color: #6c757d;
-    font-size: 16px;
-    margin-bottom: 30px;
-    font-weight: bold;
-}
-
+/* تنسيق حقول الإدخال */
 .input-group {
-    text-align: right;
-    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 25px;
 }
 
 .input-group label {
-    display: block;
-    margin-bottom: 8px;
-    color: #4a4e69;
-    font-weight: 600;
-    font-size: 15px;
+    font-weight: bold;
+    color: #34495e;
+    font-size: 14px;
 }
 
-input[type="text"] {
-    width: 100%;
-    padding: 14px;
-    border: 2px solid #ced4da;
-    border-radius: 10px;
+.input-group input {
+    padding: 12px;
+    border: 2px solid #dcdde1;
+    border-radius: 6px;
     font-size: 16px;
-    text-align: center;
     outline: none;
-    transition: border-color 0.2s;
+    transition: border-color 0.3s;
 }
 
-input[type="text"]:focus {
-    border-color: #d9381e;
+.input-group input:focus {
+    border-color: #27ae60;
 }
 
-.btn {
-    background: linear-gradient(to right, #d9381e, #ff7043);
+/* 🎯 حاوية الزر لدفعه إلى أقصى اليمين تماماً بعيداً عن المنتصف */
+.button-wrapper {
+    display: flex;
+    justify-content: flex-start; /* يدفع الزر لليمين لأن اتجاه الصفحة RTL */
+}
+
+.start-btn {
+    background-color: #27ae60;
     color: white;
     border: none;
-    padding: 15px 35px;
+    padding: 12px 40px;
     font-size: 18px;
     font-weight: bold;
-    border-radius: 12px;
+    border-radius: 6px;
     cursor: pointer;
-    width: 100%;
-    box-shadow: 0 5px 15px rgba(217, 56, 30, 0.3);
-    margin-top: 10px;
+    transition: background-color 0.2s, transform 0.1s;
+    box-shadow: 0 4px 6px rgba(39, 174, 96, 0.2);
 }
 
-.options-grid {
+.start-btn:hover {
+    background-color: #219150;
+}
+
+.start-btn:active {
+    transform: scale(0.98);
+}
+
+/* 🎯 حاوية الأسئلة (تتموضع بالمنتصف تماماً) */
+.quiz-questions-container {
+    background-color: #ffffff;
+    width: 100%;
+    max-width: 650px;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    text-align: center;
+}
+
+.question-box h2 {
+    color: #2c3e50;
+    font-size: 20px;
+    margin-bottom: 25px;
+}
+
+/* أزرار الإجابات بالمنتصف تماماً */
+.options-wrapper {
     display: flex;
     flex-direction: column;
     gap: 12px;
-    margin: 25px 0;
+    max-width: 400px;
+    margin: 0 auto; /* سنتر الأجوبة بالمنتصف */
 }
 
 .option-btn {
-    background: #f8f9fa;
-    border: 2px solid #f1f3f5;
+    background-color: #f8f9fa;
+    border: 2px solid #e2e8f0;
     padding: 14px;
-    border-radius: 10px;
-    cursor: pointer;
     font-size: 16px;
-    text-align: right;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
     transition: all 0.2s;
 }
 
 .option-btn:hover {
-    background: #e9ecef;
+    background-color: #e2e8f0;
+    border-color: #cbd5e1;
 }
 
-.option-btn.correct {
-    background: #d4edda;
-    border-color: #c3e6cb;
-    color: #155724;
-    font-weight: bold;
-}
-
-.option-btn.wrong {
-    background: #f8d7da;
-    border-color: #f5c6cb;
-    color: #721c24;
-    font-weight: bold;
-}
-
+/* كلاسات التحكم في الإخفاء والظهور */
 .hidden {
     display: none !important;
-}
-
-.quiz-header {
-    display: flex;
-    justify-content: space-between;
-    color: #888;
-    font-size: 14px;
-    margin-bottom: 20px;
-    border-bottom: 1px solid #eee;
-    padding-bottom: 10px;
-}
-
-.student-info-box {
-    background: #f8f9fa;
-    padding: 15px;
-    border-radius: 10px;
-    margin-bottom: 20px;
-    text-align: right;
-    border-right: 5px solid #d9381e;
-}
-
-.score-box {
-    margin: 20px 0;
-    font-size: 20px;
-}
-
-#final-score {
-    font-size: 48px;
-    font-weight: bold;
-    color: #d9381e;
-}
-
-.status-message {
-    color: #4caf50;
-    font-weight: bold;
-    margin-top: 15px;
 }
