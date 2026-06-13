@@ -1,12 +1,13 @@
  let studentData = { name: '', seat: '', score: 0 };
+
+// 🛠️ تم إرجاع رابط الـ Apps Script الحقيقي الخاص بك هنا بدلاً من جوجل لتجنب عطل وتجمد الكود
 const webAppUrl = "https://script.google.com/macros/s/AKfycbx6YdOX7-C57i46yYR-stBf_ajmlFDXfEY_oYbFEjq8kdVV2T-nkMCzWpiNAWthHA84/exec"; 
 
-// 📝 1. ضع أسئلتك الحقيقية هنا بالكامل بنفس هذا النمط:
+// 📝 قائمة الأسئلة الثلاثة الحالية
 const questions = [
   { q: "ما هو ناتج جمع 5 + 7؟", options: ["10", "11", "12", "13"], answer: "12" },
   { q: "ما هو ناتج ضرب 3 × 4؟", options: ["7", "12", "14", "16"], answer: "12" },
   { q: "ما هو ناتج طرح 20 - 8؟", options: ["10", "11", "12", "13"], answer: "12" }
-  // يمكنك إضافة أي عدد من الأسئلة هنا بالأسفل...
 ];
 
 let currentQuestionIndex = 0; // عداد الأسئلة الحالي
@@ -24,7 +25,7 @@ document.getElementById('startQuizBtn').addEventListener('click', function(e) {
     
     studentData.name = nameInput;
     studentData.seat = seatInput;
-    studentData.score = 0; // تصغير العداد للبدء
+    studentData.score = 0; 
     currentQuestionIndex = 0;
     
     document.getElementById('welcomeScreen').classList.add('hidden');
@@ -34,7 +35,7 @@ document.getElementById('startQuizBtn').addEventListener('click', function(e) {
 });
 
 function loadQuestion() {
-    // التحقق مما إذا انتهت الأسئلة
+    // التحقق مما إذا انتهت الأسئلة الثلاثة
     if (currentQuestionIndex >= questions.length) {
         endQuiz();
         return;
@@ -54,7 +55,7 @@ function loadQuestion() {
         btn.onclick = function() {
             // احتساب الدرجة إذا كانت الإجابة صحيحة
             if(opt === currentQ.answer) { 
-                studentData.score += 1; // يضيف نقطة لكل سؤال صحيح
+                studentData.score += 1; 
             }
             
             // الانتقال التلقائي للسؤال التالي فوراً
@@ -74,7 +75,7 @@ function loadQuestion() {
     }, 400); 
 }
 
-// دالة إنهاء الامتحان وإرسال النتيجة النهائية لجوجل شيتس مرة واحدة
+// دالة إنهاء الامتحان وإرسال النتيجة النهائية لجوجل شيتس مرة واحدة بعد نهاية السؤال الثالث
 function endQuiz() {
     document.getElementById('quizScreen').innerHTML = "<h2>جاري إرسال النتيجة النهائية، برجاء الانتظار...</h2>";
     
