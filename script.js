@@ -28,10 +28,10 @@ let studentName = "";
 let seatNumber = "";
 
 // ⚠️ توجيه البيانات مباشرة لـ "الورقة2" بالأسفل الخاصة بالرياضيات لفرزها تلقائياً
-const subjectName = "الورقة2"; 
+const subjectName = "الرياضيات"; 
 
 // ⚠️ ضع رابط تطبيق الويب (Web App URL) المستخرج من الإصدار 11 الأخير لسكريبت جوجل هنا:
-const webAppUrl = "ضع_رابط_تطبيق_الويب_الخاص_بك_هنا"; 
+const webAppUrl = " https://script.google.com/macros/s/AKfycbx3_YE3aLVQwVJ1HH8P5kLHF_ZShxhnVwD_N_Ce3SOznUnWzXrtobY_EDDagw0G4xLs/exec"; 
 
 const startScreen = document.getElementById('start-screen');
 const quizScreen = document.getElementById('quiz-screen');
