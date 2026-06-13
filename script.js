@@ -31,7 +31,7 @@ let seatNumber = "";
 const subjectName = "الرياضيات"; 
 
 // ⚠️ ضع رابط تطبيق الويب (Web App URL) المستخرج من الإصدار 11 الأخير لسكريبت جوجل هنا:
-const webAppUrl = " https://script.google.com/macros/s/AKfycbx3_YE3aLVQwVJ1HH8P5kLHF_ZShxhnVwD_N_Ce3SOznUnWzXrtobY_EDDagw0G4xLs/exec"; 
+const webAppUrl = "https://script.google.com/macros/s/AKfycbwyDe1Q1y0qBzJu2YTmdQjdbxQ55HfniiprfhoN0Rx4rAbFruNSUx0i1Qt1Ud7opkW5/exec"; 
 
 const startScreen = document.getElementById('start-screen');
 const quizScreen = document.getElementById('quiz-screen');
