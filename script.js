@@ -1,11 +1,15 @@
  let studentData = { name: '', seat: '', score: 0 };
-
-// تم إصلاح الرابط هنا بدقة تامة وبدون تداخل نصوص
 const webAppUrl = "https://script.google.com/macros/s/AKfycbx6YdOX7-C57i46yYR-stBf_ajmlFDXfEY_oYbFEjq8kdVV2T-nkMCzWpiNAWthHA84/exec"; 
 
+// 📝 1. ضع أسئلتك الحقيقية هنا بالكامل بنفس هذا النمط:
 const questions = [
-  { q: "ما هو ناتج جمع 5 + 7؟", options: ["10", "11", "12", "13"], answer: "12" }
+  { q: "ما هو ناتج جمع 5 + 7؟", options: ["10", "11", "12", "13"], answer: "12" },
+  { q: "ما هو ناتج ضرب 3 × 4؟", options: ["7", "12", "14", "16"], answer: "12" },
+  { q: "ما هو ناتج طرح 20 - 8؟", options: ["10", "11", "12", "13"], answer: "12" }
+  // يمكنك إضافة أي عدد من الأسئلة هنا بالأسفل...
 ];
+
+let currentQuestionIndex = 0; // عداد الأسئلة الحالي
 
 document.getElementById('startQuizBtn').addEventListener('click', function(e) {
     e.preventDefault();
@@ -14,12 +18,14 @@ document.getElementById('startQuizBtn').addEventListener('click', function(e) {
     const seatInput = document.getElementById('seatNumber').value.trim();
     
     if (nameInput === "" || seatInput === "") {
-        alert("من فضلك أدخل الاسم ورقم الجلوس");
+        alert("من فضلك أدخل الاسم ورقم الجلوس أولاً!");
         return;
     }
     
     studentData.name = nameInput;
     studentData.seat = seatInput;
+    studentData.score = 0; // تصغير العداد للبدء
+    currentQuestionIndex = 0;
     
     document.getElementById('welcomeScreen').classList.add('hidden');
     document.getElementById('quizScreen').classList.remove('hidden');
@@ -28,7 +34,13 @@ document.getElementById('startQuizBtn').addEventListener('click', function(e) {
 });
 
 function loadQuestion() {
-    const currentQ = questions[0];
+    // التحقق مما إذا انتهت الأسئلة
+    if (currentQuestionIndex >= questions.length) {
+        endQuiz();
+        return;
+    }
+
+    const currentQ = questions[currentQuestionIndex];
     document.getElementById('questionText').innerText = currentQ.q;
     
     const wrapper = document.getElementById('optionsWrapper');
@@ -40,28 +52,36 @@ function loadQuestion() {
         btn.innerText = opt;
         
         btn.onclick = function() {
+            // احتساب الدرجة إذا كانت الإجابة صحيحة
             if(opt === currentQ.answer) { 
-                studentData.score = 4; 
+                studentData.score += 1; // يضيف نقطة لكل سؤال صحيح
             }
-            sendDataToGoogleSheets();
+            
+            // الانتقال التلقائي للسؤال التالي فوراً
+            currentQuestionIndex++;
+            loadQuestion();
         };
         
         wrapper.appendChild(btn);
     });
     
+    // 🛡️ درع الحماية لمنع اللخبطة وقت ظهور السؤال
     const allOptions = document.querySelectorAll('.option-btn');
     allOptions.forEach(b => b.style.pointerEvents = 'none');
     
     setTimeout(() => {
         allOptions.forEach(b => b.style.pointerEvents = 'auto');
-    }, 500); 
+    }, 400); 
 }
 
-function sendDataToGoogleSheets() {
+// دالة إنهاء الامتحان وإرسال النتيجة النهائية لجوجل شيتس مرة واحدة
+function endQuiz() {
+    document.getElementById('quizScreen').innerHTML = "<h2>جاري إرسال النتيجة النهائية، برجاء الانتظار...</h2>";
+    
     const payload = {
         studentName: studentData.name,
         seatNumber: studentData.seat,
-        studentScore: studentData.score + " / 4",
+        studentScore: studentData.score + " / " + questions.length,
         subjectName: "الرياضيات"
     };
     
@@ -72,7 +92,11 @@ function sendDataToGoogleSheets() {
         body: JSON.stringify(payload)
     })
     .then(() => {
-        alert("تم تسجيل إجابتك وإرسال النتيجة بنجاح!");
+        alert("تم إنهاء الاختبار وتسجيل النتيجة النهائية بنجاح! 🎉");
+        document.getElementById('quizScreen').innerHTML = "<h2>شكرًا لك يا " + studentData.name + "، تم تسجيل درجتك بنجاح!</h2>";
     })
-    .catch(err => console.error("خطأ في الإرسال:", err));
+    .catch(err => {
+        console.error("خطأ في الإرسال:", err);
+        document.getElementById('quizScreen').innerHTML = "<h2>حدث خطأ أثناء إرسال النتيجة، يرجى إبلاغ المعلم.</h2>";
+    });
 }
