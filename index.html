@@ -1,0 +1,61 @@
+ <!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>اختبار مادة الرياضيات التفاعلي</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+        <!-- 1. شاشة البداية وتسجيل البيانات -->
+        <div id="start-screen" class="card">
+            <h1 class="main-title">📐 اختبار مادة الرياضيات</h1>
+            <p class="subtitle">المرحلة الابتدائية المطور</p>
+            
+            <div class="input-group">
+                <label>يرجى كتابة اسمك الثلاثي:</label>
+                <input type="text" id="student-name" placeholder="أحمد محمد علي" required>
+            </div>
+
+            <div class="input-group">
+                <label>يرجى كتابة رقم الجلوس:</label>
+                <input type="text" id="seat-number" placeholder="1024" required>
+            </div>
+
+            <button id="start-btn" class="btn">
+                <span>بدء اختبار الرياضيات 📝</span>
+            </button>
+        </div>
+
+        <!-- 2. شاشة عرض الأسئلة الحسابية -->
+        <div id="quiz-screen" class="card hidden">
+            <div class="quiz-header">
+                <span id="progress">السؤال 1 من 4</span>
+            </div>
+            <h2 id="question-text" style="direction: rtl; text-align: center; padding: 10px;">نص السؤال؟</h2>
+            <div id="options-container" class="options-grid" style="direction: rtl;">
+                <!-- الخيارات يتم إنشاؤها عبر الجافا سكريبت -->
+            </div>
+            <button id="next-btn" class="btn hidden">السؤال التالي ⬅️</button>
+        </div>
+
+        <!-- 3. شاشة النتيجة والنهاية -->
+        <div id="result-screen" class="card hidden">
+            <h2 class="result-title">تهانينا، لقد أتممت اختبار الرياضيات!</h2>
+            <div class="student-info-box">
+                <p>الطالب: <span id="display-name" style="font-weight: bold;"></span></p>
+                <p>رقم الجلوس: <span id="display-seat" style="font-weight: bold;"></span></p>
+            </div>
+            <div class="score-box">
+                <p>درجتك هي:</p>
+                <span id="final-score">0</span> / <span id="total-questions">0</span>
+            </div>
+            <p id="upload-status" style="color: #666; font-style: italic;">جاري إرسال نتيجتك إلى جدول بيانات الرياضيات...</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
